@@ -13,6 +13,9 @@ public class Rocky22 {
 //		String id = sc.nextLine().toString();
 //		
 //		System.out.println(TWId.isRight(id));
+		
+		//1. 新增回傳男生或女生
+		//2. 新增戶口地址
 		TWId id1 = new TWId();
 		TWId id2 = new TWId(true);
 		TWId id3 = new TWId('T');
