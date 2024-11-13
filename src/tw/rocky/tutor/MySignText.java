@@ -4,26 +4,27 @@ import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
 
-import tw.rocky.apis.MyDrawer;
+import tw.rocky.apis.MyDrawerText;
 
-public class MySign extends JFrame{
-	private MyDrawer myDrawer;
+public class MySignText extends JFrame{
+	private MyDrawerText myDrawerText;
 	
-	public MySign() {
-		super("簽名");
+	public MySignText() {
+		super("測試測試");
 		
 		setLayout(new BorderLayout());
-		myDrawer = new MyDrawer();
-		add(myDrawer, BorderLayout.CENTER);
+		myDrawerText = new MyDrawerText();
+		add(myDrawerText, BorderLayout.CENTER);
 		
 		setSize(800, 600);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new MySign();
+		new MySignText();
 	}
 
 }
