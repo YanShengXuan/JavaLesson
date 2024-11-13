@@ -66,12 +66,6 @@ public class MyDrawer extends JPanel{
 			
 			repaint();
 		}
-		
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println(String.format("Releas: %d %d", e.getX(), e.getY()));
-		}
 	}
 	
 }
