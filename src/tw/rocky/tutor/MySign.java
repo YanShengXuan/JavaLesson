@@ -1,25 +1,96 @@
 package tw.rocky.tutor;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import tw.rocky.apis.MyDrawer;
+import tw.rocky.apis.MyDrawer2;
 
 public class MySign extends JFrame{
-	private MyDrawer myDrawer;
+	private MyDrawer2 myDrawer;
+	private JButton clear, undo, redo, color;
 	
 	public MySign() {
 		super("簽名");
 		
 		setLayout(new BorderLayout());
-		myDrawer = new MyDrawer();
+		myDrawer = new MyDrawer2();
 		add(myDrawer, BorderLayout.CENTER);
+		
+		clear = new JButton("清除");
+		undo = new JButton("上一步");
+		redo = new JButton("下一步");
+		color = new JButton("更換顏色");
+		
+		JPanel top = new JPanel(new FlowLayout());
+		top.add(clear);
+		top.add(undo);
+		top.add(redo);
+		top.add(color);
+		add(top, BorderLayout.NORTH);
 		
 		setSize(800, 600);
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		initEvent();
 	}
+	
+	private void initEvent() {
+		clear.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				myDrawer.clear();
+				
+			}
+		});
+		
+		undo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				myDrawer.undo();
+			}
+		});
+		
+		redo.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				myDrawer.redo();
+				
+			}
+		});
+		
+		color.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				changeColor();
+			}
+		});
+		
+	}
+	
+	private void changeColor() {
+		Color newColor = JColorChooser.showDialog(this, "顏色", myDrawer.getColor());
+		if(newColor != null) {
+			myDrawer.setColor(newColor);
+		}
+	}
+	
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

@@ -11,17 +11,19 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
-public class MyDrawer extends JPanel{
+public class MyDrawer2 extends JPanel{
 	// 單點 ==> 線 ==> 多線
-	private LinkedList<LinkedList<HashMap<String , Integer>>> lines, recycle;
+	private LinkedList<Line> lines, recycle;
+	private Color nowColor;
 	
-	public MyDrawer() {
+	public MyDrawer2() {
 		setBackground(Color.PINK);
 		MyListener listener = new MyListener();
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
-		lines = new LinkedList<LinkedList<HashMap<String,Integer>>>();
-		recycle = new LinkedList<LinkedList<HashMap<String,Integer>>>();
+		lines = new LinkedList<Line>();
+		recycle = new LinkedList<Line>();
+		nowColor = Color.RED;
 		
 	}
 	
@@ -31,14 +33,14 @@ public class MyDrawer extends JPanel{
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D)g;
 		
-		g2d.setStroke(new BasicStroke(4));
-		g2d.setColor(Color.RED);
-		
-		for(LinkedList<HashMap<String,Integer>> line : lines) {
-			for(int i = 1; i < line.size(); i++) {
-				HashMap<String, Integer> p0 = line.get(i-1);
-				HashMap<String, Integer> p1 = line.get(i);
-				g2d.drawLine(p0.get("x"), p0.get("y"), p1.get("x"), p1.get("y"));
+		for(Line line : lines) {
+			g2d.setColor(line.getColor());
+			g2d.setStroke(new BasicStroke(line.getWidth()));
+			
+			for(int i = 1; i < line.getSize(); i++) {
+				Point p0 = line.getPoint(i-1);
+				Point p1 = line.getPoint(i);
+				g2d.drawLine(p0.getX(), p0.getY(), p1.getX(), p1.getY());
 			}
 		}
 	}
@@ -49,11 +51,9 @@ public class MyDrawer extends JPanel{
 			// TODO Auto-generated method stub
 //			System.out.println(String.format("Press: %d %d", e.getX(), e.getY()));
 			recycle.clear();
-			HashMap<String, Integer> point = new HashMap<String, Integer>();
-			point.put("x", e.getX());
-			point.put("y", e.getY());
-			LinkedList<HashMap<String,Integer>> line = new LinkedList<HashMap<String,Integer>>();
-			line.add(point);
+			Line line = new Line(nowColor, 4);
+			Point point = new Point(e.getX(), e.getY());
+			line.addPoint(point);
 			lines.add(line);
 		}
 		
@@ -61,10 +61,9 @@ public class MyDrawer extends JPanel{
 		public void mouseDragged(MouseEvent e) {
 			// TODO Auto-generated method stub
 //			System.out.println(String.format("Drag: %d %d", e.getX(), e.getY()));
-			HashMap<String, Integer> point = new HashMap<String, Integer>();
-			point.put("x", e.getX());
-			point.put("y", e.getY());
-			lines.getLast().add(point);
+			Point point = new Point(e.getX(), e.getY());
+			lines.getLast().addPoint(point);
+			
 			
 			repaint();
 		}
@@ -88,5 +87,12 @@ public class MyDrawer extends JPanel{
 		}
 	}
 	
+	public void setColor(Color newColor) {
+		nowColor = newColor;
+	}
+	
+	public Color getColor() {
+		return nowColor;
+	}
 }
 
