@@ -6,12 +6,20 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
-public class MyDrawer2 extends JPanel{
+public class MyDrawer2 extends JPanel implements Serializable{
 	// 單點 ==> 線 ==> 多線
 	private LinkedList<Line> lines, recycle;
 	private Color nowColor;
@@ -93,6 +101,35 @@ public class MyDrawer2 extends JPanel{
 	
 	public Color getColor() {
 		return nowColor;
+	}
+	
+	public boolean save(File saveFile) throws Exception {
+		BufferedImage image = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+		paint(image.getGraphics());
+		try {
+            if(ImageIO.write(image, "jpg", saveFile)) {
+            	return true;
+            }else {
+				throw new Exception();
+			}
+        } catch (Exception e) {
+        	throw new Exception();
+        }
+	}
+	
+	public void saveLines(File saveFile) throws Exception{
+		try(ObjectOutputStream oout = new ObjectOutputStream(new FileOutputStream(saveFile))){
+			oout.writeObject(lines);
+			oout.flush();
+		}
+	}
+	
+	public void loadLines(File loadFile) throws Exception{
+		ObjectInputStream oin = new ObjectInputStream(new FileInputStream(loadFile));
+		lines = (LinkedList<Line>)oin.readObject();
+		recycle.clear();
+		oin.close();
+		repaint();		
 	}
 }
 

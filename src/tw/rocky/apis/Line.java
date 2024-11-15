@@ -1,9 +1,10 @@
 package tw.rocky.apis;
 
 import java.awt.Color;
+import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Line {
+public class Line  implements Serializable{
 	private LinkedList<Point> line;
 	private Color color;
 	private float width;

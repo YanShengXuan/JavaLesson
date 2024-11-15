@@ -1,6 +1,8 @@
 package tw.rocky.apis;
 
-public class Bike {
+import java.io.Serializable;
+
+public class Bike implements Serializable {
 	protected void name() {
 		
 	} double speed;
