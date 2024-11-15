@@ -9,10 +9,11 @@ public class Rocky46 {
 		// TODO Auto-generated method stub
 		try(FileReader fr = new FileReader("dir1/ns1hosp.csv");){
 			BufferedReader reader = new BufferedReader(fr);
-			String line;
 			
+			String line;			
 			while((line =  reader.readLine()) != null) {
-				System.out.println(line);
+				String[] data = line.split(",");
+				System.out.println(data[2]);
 				}
 			}catch (Exception e) {
 				// TODO: handle exception
