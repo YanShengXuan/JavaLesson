@@ -14,11 +14,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import tw.rocky.apis.MyClock;
 import tw.rocky.apis.MyDrawer2;
 
 public class MySign extends JFrame{
 	private MyDrawer2 myDrawer;
 	private JButton clear, undo, redo, color, save, saveObj, loadObj;
+	private MyClock myclock;
 	
 	public MySign() {
 		super("簽名");
@@ -34,6 +36,7 @@ public class MySign extends JFrame{
 		save = new JButton("存檔");
 		saveObj = new JButton("儲存紀錄");
 		loadObj = new JButton("讀取紀錄");
+		myclock =new MyClock();
 		
 		JPanel top = new JPanel(new FlowLayout());
 		top.add(clear);
@@ -43,6 +46,7 @@ public class MySign extends JFrame{
 		top.add(save);
 		top.add(saveObj);
 		top.add(loadObj);
+		top.add(myclock);
 		add(top, BorderLayout.NORTH);
 		
 		setSize(800, 600);
