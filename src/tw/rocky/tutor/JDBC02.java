@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
 
-public class JDBC2 {
+public class JDBC02 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
