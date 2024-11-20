@@ -36,8 +36,6 @@ public class JDBC02 {
 			String birthday =  rs.getString("birthday");
 			System.out.printf("%s : %s : %s : %s \n", id, name, tel, birthday);
 			}
-			
-			
 		} catch (SQLException e) {
 			System.out.println(e);
 		}
