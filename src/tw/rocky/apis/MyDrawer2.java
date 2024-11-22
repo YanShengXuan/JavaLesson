@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
@@ -25,14 +24,13 @@ public class MyDrawer2 extends JPanel implements Serializable{
 	private Color nowColor;
 	
 	public MyDrawer2() {
-		setBackground(Color.PINK);
+		setBackground(Color.YELLOW);
 		MyListener listener = new MyListener();
 		addMouseListener(listener);
 		addMouseMotionListener(listener);
 		lines = new LinkedList<Line>();
 		recycle = new LinkedList<Line>();
 		nowColor = Color.RED;
-		
 	}
 	
 	@Override
